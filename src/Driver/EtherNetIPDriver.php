@@ -49,6 +49,9 @@ class EtherNetIPDriver implements DriverInterface
 
     public function send(FrameInterface $frame): FrameInterface
     {
+        if (!$this->socket) {
+            throw new \RuntimeException('Not connected');
+        }
         $start = microtime(true);
         fwrite($this->socket, $frame->toBytes());
         $header = fread($this->socket, 24); // ENIP header is 24 bytes
