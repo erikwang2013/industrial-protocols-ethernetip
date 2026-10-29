@@ -22,7 +22,7 @@ class EtherNetIPDriver implements DriverInterface
 
     public function connect(): void
     {
-        $this->socket = stream_socket_client(
+        $this->socket = @stream_socket_client(
             "tcp://{$this->host}:{$this->port}",
             $errno,
             $errstr,
